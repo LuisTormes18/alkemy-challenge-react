@@ -11,3 +11,6 @@
 html,body{
   overflow-x: hidden;
 }
+.navbar{
+	height: 80px;
+}

@@ -1,57 +1,85 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import validator from "validator";
 
-import useForm from "./../../hooks/useForm";
+import { startLogin } from './../../actions/auth';
 
-function LoginScreen() {
-    const [stateValues, handleInputChange] = useForm({
-        email: "",
-        password: "",
-    });
-    const { email, password } = stateValues;
+const LoginScreen = ()=> {
 
-    function handleSubmit(e) {
-        e.preventDefault();
-    }
-// login url = http://challenge-react.alkemy.org/
+    const { btnDisabled,msgError } = useSelector(state=>state.auth);
+    const dispatch = useDispatch();
+
     return (
         <div className="form-container">
-            <form className="form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        className="form-control"
-                        onChange={handleInputChange}
-                        value={email}
-                    />
-                </div>
+            <Formik
+                initialValues={{
+                    email: "",
+                    password: "",
+                }}
+                validate={(values) => {
+                    const errors = {};
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        className="form-control"
-                        onChange={handleInputChange}
-                        value={password}
-                    />
-                </div>
-                <div className="form-group">
-                    <input
-                        // disabled={btnDisabled}
-                        className="btn btn-primary"
-                        type="submit"
-                        value="Login"
-                    />
-                </div>
+                    if (!validator.isEmail(values.email)) {
+                        errors.email = "The Email not is Valid";
+                    }
+                    if(values.password === ''){
+                        errors.password = "The Password is required";
 
-                {/* {msgError && (
-                    <div className="alert alert-danger" role="alert">
-                        {msgError}
-                    </div>
-                )} */}
-            </form>
+                    }
+                    return errors;
+                }}
+                onSubmit={(values) => {
+                    dispatch(startLogin(values))
+
+                }}
+            >
+                {({errors}) => (
+
+                    <Form className="form">
+                        <div className="form-group">
+                            <label>Email</label>
+                            <Field
+                                type="email"
+                                name="email"
+                                placeholder="jhon123@gmail.com"
+                                className="form-control"
+                            />
+                             <ErrorMessage
+                            name="email"
+                            component={() => (
+                                <div className="text-error">{errors.email}</div>
+                            )}
+                        />
+                        </div>
+                       
+
+                        <div className="form-group">
+                            <label>Password</label>
+                            <Field
+                                type="password"
+                                name="password"
+                                className="form-control"
+                            />
+                             <ErrorMessage
+                            name="password"
+                            component={() => (
+                                <div className="text-error">{errors.password}</div>
+                            )}
+                        />
+                        </div>
+                        {msgError && <div className='alert alert-danger'>{msgError}</div>}
+                        <div className="form-group">
+                            <input
+                                disabled={btnDisabled}
+                                className="btn btn-primary"
+                                type="submit"
+                                value="Login"
+                            />
+                        </div>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 }

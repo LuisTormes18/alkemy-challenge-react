@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Switch, Redirect } from "react-router-dom";
 
 import HomeScreen from "./../components/home/HomeScreen";
@@ -8,24 +9,25 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
 function AppRouter() {
-    const Authenticated = false;
+
+    const { isAuthenticated } = useSelector(state=>state.auth);
+    
     return (
         <div>
             <BrowserRouter>
                 <Switch>
                     <PublicRoute
-                        exact
-                        path="auth/login"
+                        path="/auth/login"
                         component={LoginScreen}
-                        Authenticated={Authenticated}
+                        isAuthenticated={isAuthenticated}
                     />
                     <PrivateRoute
-                        exact
                         path="/"
                         component={HomeScreen}
-                        Authenticated={Authenticated}
+                        isAuthenticated={isAuthenticated}
                     />
                     <Redirect to="/" />
+
                 </Switch>
             </BrowserRouter>
         </div>
