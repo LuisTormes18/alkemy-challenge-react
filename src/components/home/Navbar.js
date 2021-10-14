@@ -21,6 +21,7 @@ export default function Navbar() {
         }
 
         dispatch(startSearchSuperheroByName(stateValues.search));
+        reset();
     };
     return (
         <nav className="navbar navbar-expand-lg bg-light">

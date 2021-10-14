@@ -25,6 +25,11 @@ html,body{
 	width: 300px;
 	background-color: #f1f1f1;
 }
+.title{
+	font-size: 20px;
+	color: #2c2c2c;
+	text-align: center;
+}
 
 .hero-details{
 	padding-top: 40px;
