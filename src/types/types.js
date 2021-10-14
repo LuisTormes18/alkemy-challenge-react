@@ -4,5 +4,7 @@ export const types = {
     btnDisabled:'[UI] Button Login Disabled',
     loginError:'[Auth] Login Error',
 
-    loadSquad:'[Hero] Load hero team',
+    loadTeam:'[Hero] Load hero team',
+    loadsuperheroList:'[Search] Superhero results',
+    setSuperheroActive:'[Hero] Add Superhero Active',
 };

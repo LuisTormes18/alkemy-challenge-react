@@ -1,13 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import validator from "validator";
 
-import { startLogin } from './../../actions/auth';
+import { startLogin } from "./../../actions/auth";
 
-const LoginScreen = ()=> {
-
-    const { btnDisabled,msgError } = useSelector(state=>state.auth);
+const LoginScreen = () => {
+    const { btnDisabled, msgError } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
     return (
@@ -23,19 +22,16 @@ const LoginScreen = ()=> {
                     if (!validator.isEmail(values.email)) {
                         errors.email = "The Email not is Valid";
                     }
-                    if(values.password === ''){
+                    if (values.password === "") {
                         errors.password = "The Password is required";
-
                     }
                     return errors;
                 }}
                 onSubmit={(values) => {
-                    dispatch(startLogin(values))
-
+                    dispatch(startLogin(values));
                 }}
             >
-                {({errors}) => (
-
+                {({ errors }) => (
                     <Form className="form">
                         <div className="form-group">
                             <label>Email</label>
@@ -45,14 +41,15 @@ const LoginScreen = ()=> {
                                 placeholder="jhon123@gmail.com"
                                 className="form-control"
                             />
-                             <ErrorMessage
-                            name="email"
-                            component={() => (
-                                <div className="text-error">{errors.email}</div>
-                            )}
-                        />
+                            <ErrorMessage
+                                name="email"
+                                component={() => (
+                                    <div className="text-error">
+                                        {errors.email}
+                                    </div>
+                                )}
+                            />
                         </div>
-                       
 
                         <div className="form-group">
                             <label>Password</label>
@@ -61,14 +58,18 @@ const LoginScreen = ()=> {
                                 name="password"
                                 className="form-control"
                             />
-                             <ErrorMessage
-                            name="password"
-                            component={() => (
-                                <div className="text-error">{errors.password}</div>
-                            )}
-                        />
+                            <ErrorMessage
+                                name="password"
+                                component={() => (
+                                    <div className="text-error">
+                                        {errors.password}
+                                    </div>
+                                )}
+                            />
                         </div>
-                        {msgError && <div className='alert alert-danger'>{msgError}</div>}
+                        {msgError && (
+                            <div className="alert alert-danger">{msgError}</div>
+                        )}
                         <div className="form-group">
                             <input
                                 disabled={btnDisabled}
@@ -82,6 +83,6 @@ const LoginScreen = ()=> {
             </Formik>
         </div>
     );
-}
+};
 
 export default LoginScreen;

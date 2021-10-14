@@ -1,18 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import Navbar from './Navbar'
-import Team from './Team'
+import Navbar from "./Navbar";
+import Team from "./Team";
+import ListSuperhero from "./../hero/ListSuperhero";
+
 const HomeScreen = () => {
-    const { heroTeam } = useSelector(state=>state.hero);
-    console.log(heroTeam);
+    const { superheroList } = useSelector((state) => state.hero);
+
+    console.log("superheroList", superheroList.length);
 
     return (
         <div>
-        	<Navbar />
-            
-            { heroTeam ? <Team /> : <h2>Aqui Aparecera tu equipo de heores!</h2> }
-
+            <Navbar />
+            {superheroList.length <= 0 ? <Team /> : <ListSuperhero />}
         </div>
     );
 };

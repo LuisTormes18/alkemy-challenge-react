@@ -12,29 +12,26 @@ export const startLogin = (values) => {
         });
         const result = await resp.json();
 
-        if(!result.token){
-            dispatch(loginError(result.error))
+        if (!result.token) {
+            dispatch(loginError(result.error));
             return;
-        }else{
+        } else {
             dispatch(login(result.token));
-            localStorage.setItem('token',result.token);
-            
-
+            localStorage.setItem("token", result.token);
         }
-
     };
 };
-const btnDisabled = ()=>{
-    return{
-        type:types.btnDisabled
-    }
-}
-const loginError =(msg)=>{
-return {
-    type:types.loginError,
-    payload:msg
-}
-}
+const btnDisabled = () => {
+    return {
+        type: types.btnDisabled,
+    };
+};
+const loginError = (msg) => {
+    return {
+        type: types.loginError,
+        payload: msg,
+    };
+};
 const login = (token) => {
     return {
         type: types.login,
