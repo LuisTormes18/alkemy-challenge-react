@@ -25,6 +25,12 @@ html,body{
 	width: 300px;
 	background-color: #f1f1f1;
 }
+.good{
+	color: green;
+}
+.bad{
+	color: red;
+}
 .title{
 	font-size: 20px;
 	color: #2c2c2c;

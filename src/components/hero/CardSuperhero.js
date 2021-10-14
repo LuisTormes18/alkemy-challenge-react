@@ -2,13 +2,13 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { setSuperheroActive, addToTeam } from "../../actions/hero";
+import { setSuperheroActive, setSuperheroToTeam } from "../../actions/hero";
 
 export default function CardSuperhero({ superhero }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const { name, image } = superhero;
+    const { name, image, biography } = superhero;
 
     const handleSeeDetails = () => {
         dispatch(setSuperheroActive(superhero));
@@ -16,13 +16,18 @@ export default function CardSuperhero({ superhero }) {
         history.push("/home/hero/details");
     };
     const handleAddToTeam = () => {
-        dispatch(addToTeam(superhero));
+        dispatch(setSuperheroToTeam(superhero));
     };
     return (
         <div className="card">
             <img src={image.url} className="card-img-top" alt="..." />
             <div className="card-body">
-                <h5 className="card-title">{name}</h5>
+                <h5 className="card-title">
+                    {name}
+                    <span className={biography.alignment}>
+                        {biography.alignment}
+                    </span>
+                </h5>
             </div>
             <div className="card-body">
                 <button

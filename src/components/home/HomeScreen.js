@@ -8,8 +8,6 @@ import ListSuperhero from "./../hero/ListSuperhero";
 const HomeScreen = () => {
     const { superheroList } = useSelector((state) => state.hero);
 
-    console.log("superheroList", superheroList);
-
     return (
         <div>
             <Navbar />
