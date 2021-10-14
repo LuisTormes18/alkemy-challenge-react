@@ -32,14 +32,17 @@ export default function Team() {
 
         history.push("/home/hero/details");
     };
+                // <h1 className="mt-3 title">My Team of Super heroes</h1>
+   
     return (
         <div className="superhero-team">
-            <h1 className="mt-3 title">My Team de Superhero</h1>
 
             {heroTeam.length <= 0 ? (
-                <h2>Your team of heroes will appear here!</h2>
+                <h2 className='title mt-3'>Your team of heroes will appear here!</h2>
             ) : (
+
                 <div className="conateiner mt-2 grid-superhero">
+
                     {heroTeam.map((superhero) => (
                         <div key={superhero.id} className="card">
                             <img
@@ -58,8 +61,22 @@ export default function Team() {
                                         {superhero.biography.alignment}
                                     </span>
                                 </h5>
+                                <p>
+Power Stats
+
+
+                                </p>   
+                                <ul>
+    {
+
+        Object.entries(superhero.powerstats).map(powerstats=> (<li key={superhero.id}> {powerstats} </li>) )
+    }
+
+
+
+</ul> 
                             </div>
-                            <div className="card-body">
+                            <div className="card-footer">
                                 <button
                                     onClick={() => {
                                         handleDelete(superhero.id);

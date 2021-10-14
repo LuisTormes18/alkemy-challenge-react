@@ -35,6 +35,11 @@ const heroReducer = (state = initialState, action) => {
                 ...initialState,
                 heroTeam:action.payload,
             };
+        case types.clearsuperheroList:
+            return{
+                ...state,
+                superheroList:[]
+            }
         default:
             return state;
     }

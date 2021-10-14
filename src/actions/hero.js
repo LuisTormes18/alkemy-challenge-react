@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { types } from "./../types/types";
 import {
     addSupeheroToTeamLocalStorage,
@@ -39,10 +41,12 @@ export const setSuperheroActive = (active) => {
 
 export const setSuperheroToTeam = (superhero) => {
     return (dispatch, getState) => {
+
+    	
         const { heroTeam } = getState().hero;
 
-        if (validateIfAHeroCanBeAdded(heroTeam)) {
-            addSupeheroToTeamLocalStorage(superhero);
+        if (validateIfAHeroCanBeAdded(heroTeam,superhero)) {
+            addSupeheroToTeamLocalStorage([...heroTeam, superhero]);
             dispatch(addToTeam(superhero));
         }
     };
@@ -63,3 +67,9 @@ export const removeFromTeam = (id) => {
         payload: newTeam,
     };
 };
+
+export const  clearSuperheroList = ()=>{
+return{
+    type:types.clearsuperheroList
+}
+}

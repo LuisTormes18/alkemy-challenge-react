@@ -31,6 +31,9 @@ html,body{
 .bad{
 	color: red;
 }
+.neutral{
+	color:orange;
+}
 .title{
 	font-size: 20px;
 	color: #2c2c2c;
@@ -44,4 +47,8 @@ html,body{
 .hero-details img{
 	width: 300px;
 
+}
+button{
+	border: none;
+	background-color: transparent;
 }

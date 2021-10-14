@@ -6,6 +6,7 @@ export const types = {
 
     loadTeam:'[Hero] Load hero team',
     loadsuperheroList:'[Search] Superhero results',
+    clearsuperheroList:'[Hero] Clean Superhero results',
     setSuperheroActive:'[Hero] Add Superhero Active',
     addToTeam: '[Hero] Add Suyperhero to Team',
     removeFromTeam: '[Hero] Remove Suyperhero to Team',
