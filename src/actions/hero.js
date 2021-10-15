@@ -1,17 +1,20 @@
-import axios from 'axios';
+import axios from "axios";
 
 import { types } from "./../types/types";
 import {
-    addSupeheroToTeamLocalStorage,
-    removeSupeheroFromTeamLocalStorage,
+    addSuperheroToTeamLocalStorage,
+    removeSuperheroFromTeamLocalStorage,
     showError,
     validateIfAHeroCanBeAdded,
 } from "./../helpers";
 
+const base_url = process.env.REACT_APP_SUPERHERO_API_BASE_URL;
+const token = process.env.REACT_APP_TOKEN;
+
 export const startSearchSuperheroByName = (name) => {
     return async (dispatch) => {
         const resp = await fetch(
-            `https://superheroapi.com/api.php/${2666859856949429}/search/${name}`
+            `${base_url}/${token}/search/${name}`
         );
 
         const superhero = await resp.json();
@@ -41,12 +44,10 @@ export const setSuperheroActive = (active) => {
 
 export const setSuperheroToTeam = (superhero) => {
     return (dispatch, getState) => {
-
-    	
         const { heroTeam } = getState().hero;
 
-        if (validateIfAHeroCanBeAdded(heroTeam,superhero)) {
-            addSupeheroToTeamLocalStorage([...heroTeam, superhero]);
+        if (validateIfAHeroCanBeAdded(heroTeam, superhero)) {
+            addSuperheroToTeamLocalStorage([...heroTeam, superhero]);
             dispatch(addToTeam(superhero));
         }
     };
@@ -59,17 +60,23 @@ const addToTeam = (superhero) => {
     };
 };
 
-export const removeFromTeam = (id) => {
-    const newTeam = removeSupeheroFromTeamLocalStorage(id);
+export const removeSuperheroFromTeam = (id) => {
+    return (dispatch, getState) => {
+        const { heroTeam } = getState().hero;
 
-    return {
-        type: types.removeFromTeam,
-        payload: newTeam,
+        const newTeam = heroTeam.filter((superhero) => superhero.id !== id);
+        removeSuperheroFromTeamLocalStorage(newTeam);
+        dispatch(removeFromTeam(newTeam));
     };
 };
-
-export const  clearSuperheroList = ()=>{
-return{
-    type:types.clearsuperheroList
-}
-}
+const removeFromTeam = (newTeam) => {
+    return { 
+        type: types.removeFromTeam, 
+        payload: newTeam 
+    };
+};
+export const clearSuperheroList = () => {
+    return {
+        type: types.clearsuperheroList,
+    };
+};
