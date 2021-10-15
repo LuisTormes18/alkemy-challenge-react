@@ -13,18 +13,17 @@ const token = process.env.REACT_APP_TOKEN;
 
 export const startSearchSuperheroByName = (name) => {
     return async (dispatch) => {
-        const resp = await fetch(
+        const resp = await axios.get(
             `${base_url}/${token}/search/${name}`
         );
+        const superheroes = resp.data;
 
-        const superhero = await resp.json();
-
-        if (superhero.error) {
-            showError(superhero.error);
+        if (superheroes.error) {
+            showError(superheroes.error);
             return;
         }
 
-        dispatch(setSuperheroList(superhero.results));
+        dispatch(setSuperheroList(superheroes.results));
     };
 };
 

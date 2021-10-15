@@ -6,14 +6,13 @@ export const startLogin = (values) => {
     return async (dispatch) => {
         dispatch(btnDisabled());
 
-        const resp = await fetch("http://challenge-react.alkemy.org/", {
-            headers: {
-                "Content-type": "application/json",
-            },
+        const resp = await axios({
             method: "POST",
-            body: JSON.stringify(values),
+            url:"http://challenge-react.alkemy.org/", 
+            data:values,
         });
-        const result = await resp.json();
+        
+        const result = resp.data;
 
         if (!result.token) {
             dispatch(loginError(result.error));
