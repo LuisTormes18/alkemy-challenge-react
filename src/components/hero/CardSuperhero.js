@@ -13,11 +13,12 @@ export default function CardSuperhero({ superhero }) {
     const handleSeeDetails = () => {
         dispatch(setSuperheroActive(superhero));
 
-        history.push("/home/hero/details");
+        history.push("/heroes/details");
     };
     const handleAddToTeam = () => {
         dispatch(setSuperheroToTeam(superhero));
     };
+    
     return (
         <div className="card">
             <img src={image.url} className="card-img-top" alt="..." />

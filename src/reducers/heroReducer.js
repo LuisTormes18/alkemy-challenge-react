@@ -27,7 +27,7 @@ const heroReducer = (state = initialState, action) => {
             };
         case types.addToTeam:
             return {
-                ...initialState,
+                ...state,
                 heroTeam:[...state.heroTeam, action.payload]
             };
          case types.removeFromTeam:
@@ -35,7 +35,7 @@ const heroReducer = (state = initialState, action) => {
                 ...initialState,
                 heroTeam:action.payload,
             };
-        case types.clearsuperheroList:
+        case types.cleansuperheroList:
             return{
                 ...state,
                 superheroList:[]

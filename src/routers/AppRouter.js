@@ -3,7 +3,10 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Switch, Redirect } from "react-router-dom";
 
 import HomeScreen from "./../components/home/HomeScreen";
+import Navbar from "./../components/ui/Navbar";
+
 import HeroScreen from "./../components/hero/HeroScreen";
+import SearchSuperheroesScreen from "./../components/hero/SearchSuperheroesScreen";
 import LoginScreen from "../components/auth/LoginScreen";
 
 import PrivateRoute from "./PrivateRoute";
@@ -22,9 +25,20 @@ function AppRouter() {
                         component={LoginScreen}
                         isAuthenticated={isAuthenticated}
                     />
-                     <PrivateRoute
-                        path="/home/hero/details"
+                    <div>
+
+
+                    <Navbar />
+                   <Switch>
+
+ <PrivateRoute
+                        path="/heroes/details"
                         component={HeroScreen}
+                        isAuthenticated={isAuthenticated}
+                    />
+                    <PrivateRoute
+                        path="/heroes/search"
+                        component={SearchSuperheroesScreen}
                         isAuthenticated={isAuthenticated}
                     />
                     <PrivateRoute
@@ -32,6 +46,8 @@ function AppRouter() {
                         component={HomeScreen}
                         isAuthenticated={isAuthenticated}
                     />
+                   </Switch>
+                    </div>      
                     
                     <Redirect to="/" />
 

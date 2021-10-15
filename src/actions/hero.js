@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import { types } from "./../types/types";
 import {
@@ -48,6 +49,8 @@ export const setSuperheroToTeam = (superhero) => {
         if (validateIfAHeroCanBeAdded(heroTeam, superhero)) {
             addSuperheroToTeamLocalStorage([...heroTeam, superhero]);
             dispatch(addToTeam(superhero));
+            Swal.fire("Added!", "Your file has been Added.", "success");
+
         }
     };
 };
@@ -74,8 +77,8 @@ const removeFromTeam = (newTeam) => {
         payload: newTeam 
     };
 };
-export const clearSuperheroList = () => {
+export const cleanSuperheroList = () => {
     return {
-        type: types.clearsuperheroList,
+        type: types.cleansuperheroList,
     };
 };
