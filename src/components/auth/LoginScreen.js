@@ -10,7 +10,7 @@ const LoginScreen = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className="form-container">
+        <div className="login-screen form-container">
             <Formik
                 initialValues={{
                     email: "",
@@ -34,12 +34,12 @@ const LoginScreen = () => {
                 {({ errors }) => (
                     <Form className="form">
                         <div className="form-group">
-                            <label>Email</label>
+                            <label className="mt-3">Email</label>
                             <Field
                                 type="email"
                                 name="email"
                                 placeholder="jhon123@gmail.com"
-                                className="form-control"
+                                className="form-control mt-3"
                             />
                             <ErrorMessage
                                 name="email"
@@ -52,11 +52,11 @@ const LoginScreen = () => {
                         </div>
 
                         <div className="form-group">
-                            <label>Password</label>
+                            <label className="mt-3">Password</label>
                             <Field
                                 type="password"
                                 name="password"
-                                className="form-control"
+                                className="form-control mt-3"
                             />
                             <ErrorMessage
                                 name="password"
@@ -68,9 +68,11 @@ const LoginScreen = () => {
                             />
                         </div>
                         {msgError && (
-                            <div className="alert alert-danger">{msgError}</div>
+                            <div className="alert alert-danger mt-3">
+                                {msgError}
+                            </div>
                         )}
-                        <div className="form-group">
+                        <div className="form-group mt-3">
                             <input
                                 disabled={btnDisabled}
                                 className="btn btn-primary"

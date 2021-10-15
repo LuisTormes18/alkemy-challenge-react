@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import {
     setSuperheroActive,
+    loadMySuperheroesTeam,
     removeSuperheroFromTeam,
 } from "../../actions/hero";
 
@@ -12,6 +13,10 @@ export default function HomeScreen() {
     const { heroTeam } = useSelector((state) => state.hero);
     const history = useHistory();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadMySuperheroesTeam());
+    }, [dispatch]);
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -33,7 +38,7 @@ export default function HomeScreen() {
     const handleSeeDetails = (superhero) => {
         dispatch(setSuperheroActive(superhero));
 
-        history.push("/home/hero/details");
+        history.push("/heroes/details");
     };
 
     return (
@@ -71,7 +76,8 @@ export default function HomeScreen() {
                                             superhero.powerstats
                                         ).map((powerstats) => (
                                             <li key={superhero.id}>
-                                                {powerstats}
+                                                <span>{powerstats[0]}</span>
+                                                {powerstats[1]}
                                             </li>
                                         ))}
                                     </ul>
@@ -89,7 +95,7 @@ export default function HomeScreen() {
                                         onClick={() => {
                                             handleSeeDetails(superhero);
                                         }}
-                                        className="card-link"
+                                        className="card-link ms-5"
                                     >
                                         See Details
                                     </button>

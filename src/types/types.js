@@ -5,6 +5,7 @@ export const types = {
     loginError:'[Auth] Login Error',
 
     loadTeam:'[Hero] Load hero team',
+    cleanTeam:'[Hero] Clean hero team',
     loadsuperheroList:'[Search] Superhero results',
     cleansuperheroList:'[Hero] Clean Superhero results',
     setSuperheroActive:'[Hero] Add Superhero Active',

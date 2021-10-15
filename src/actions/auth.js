@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 import { types } from "./../types/types";
 
@@ -6,20 +6,21 @@ export const startLogin = (values) => {
     return async (dispatch) => {
         dispatch(btnDisabled());
 
-        const resp = await axios({
-            method: "POST",
-            url:"http://challenge-react.alkemy.org/", 
-            data:values,
-        });
-        
-        const result = resp.data;
+        try {
+            const resp = await axios({
+                method: "POST",
+                url: "http://challenge-react.alkemy.org/",
+                data: values,
+            });
 
-        if (!result.token) {
-            dispatch(loginError(result.error));
-            return;
-        } else {
+            const result = resp.data;
+
             dispatch(login(result.token));
             localStorage.setItem("token", result.token);
+        } catch (err) {
+            dispatch(btnDisabled());
+
+            dispatch(loginError("username or password incorrect"));
         }
     };
 };

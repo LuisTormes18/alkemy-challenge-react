@@ -1,9 +1,7 @@
 import { types } from "./../types/types";
 
-const heroTeam = JSON.parse(localStorage.getItem("heroTeam")) || [];
-
 const initialState = {
-    heroTeam,
+    heroTeam: [],
     superheroActive: null,
     superheroList: [],
 };
@@ -28,18 +26,23 @@ const heroReducer = (state = initialState, action) => {
         case types.addToTeam:
             return {
                 ...state,
-                heroTeam:[...state.heroTeam, action.payload]
+                heroTeam: [...state.heroTeam, action.payload],
             };
-         case types.removeFromTeam:
+        case types.removeFromTeam:
             return {
                 ...initialState,
-                heroTeam:action.payload,
+                heroTeam: action.payload,
             };
         case types.cleansuperheroList:
-            return{
+            return {
                 ...state,
-                superheroList:[]
-            }
+                superheroList: [],
+            };
+        case types.cleanTeam:
+            return {
+                ...state,
+                heroTeam: [],
+            };
         default:
             return state;
     }

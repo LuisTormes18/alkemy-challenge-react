@@ -1,11 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Redirect } from "react-router-dom";
 
 import HomeScreen from "./../components/home/HomeScreen";
 import Navbar from "./../components/ui/Navbar";
 
-import HeroScreen from "./../components/hero/HeroScreen";
+import SuperheroDetailsScreen from "./../components/hero/SuperheroDetailsScreen";
 import SearchSuperheroesScreen from "./../components/hero/SearchSuperheroesScreen";
 import LoginScreen from "../components/auth/LoginScreen";
 
@@ -13,9 +13,8 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
 function AppRouter() {
+    const { isAuthenticated } = useSelector((state) => state.auth);
 
-    const { isAuthenticated } = useSelector(state=>state.auth);
-    
     return (
         <div>
             <BrowserRouter>
@@ -26,31 +25,27 @@ function AppRouter() {
                         isAuthenticated={isAuthenticated}
                     />
                     <div>
+                        <Navbar />
+                        <Switch>
+                            <PrivateRoute
+                                path="/heroes/details"
+                                component={SuperheroDetailsScreen}
+                                isAuthenticated={isAuthenticated}
+                            />
+                            <PrivateRoute
+                                path="/heroes/search"
+                                component={SearchSuperheroesScreen}
+                                isAuthenticated={isAuthenticated}
+                            />
+                            <PrivateRoute
+                                path="/"
+                                component={HomeScreen}
+                                isAuthenticated={isAuthenticated}
+                            />
+                        </Switch>
+                    </div>
 
-
-                    <Navbar />
-                   <Switch>
-
- <PrivateRoute
-                        path="/heroes/details"
-                        component={HeroScreen}
-                        isAuthenticated={isAuthenticated}
-                    />
-                    <PrivateRoute
-                        path="/heroes/search"
-                        component={SearchSuperheroesScreen}
-                        isAuthenticated={isAuthenticated}
-                    />
-                    <PrivateRoute
-                        path="/"
-                        component={HomeScreen}
-                        isAuthenticated={isAuthenticated}
-                    />
-                   </Switch>
-                    </div>      
-                    
                     <Redirect to="/" />
-
                 </Switch>
             </BrowserRouter>
         </div>

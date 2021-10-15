@@ -5,50 +5,103 @@
     margin: 0;
     box-sizing: border-box;
 
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "Josefin Sans", Helvetica, Arial, sans-serif;
     font-size: 16px;
 }
-html,body{
-  overflow-x: hidden;
+html,
+body {
+    overflow-x: hidden;
 }
-.navbar{
-	height: 80px;
+header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    align-items: center;
+    background-color: #364f6b;
 }
-.grid-superhero{
-	padding: 40px;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap:20px;
+header nav {
+    display: flex;
+    gap: 10px;
 }
-.card{
-	width: 300px;
-	background-color: #f1f1f1;
+.grid-superhero {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
-.good{
-	color: green;
+.card {
+    width: 300px;
+    background-color: #f1f1f1;
 }
-.bad{
-	color: red;
+.good {
+    color: green;
 }
-.neutral{
-	color:orange;
+.bad {
+    color: red;
 }
-.title{
-	font-size: 20px;
-	color: #2c2c2c;
-	text-align: center;
+.neutral {
+    color: orange;
+}
+.title {
+    font-size: 20px;
+    color: #2c2c2c;
+    text-align: center;
 }
 
-.hero-details{
-	padding-top: 40px;
-	display: flex;
+.superhero-details {
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
 }
-.hero-details img{
-	width: 300px;
+.superhero-details img {
+    width: 300px;
+}
+.superhero-details .details {
+    padding: 40px;
+    width: 350px;
+}
+ul {
+    list-style: none;
+}
+ul li span {
+    font-weight: bold;
+    padding: 5px 10px;
+}
+button {
+    border: none;
+    background-color: transparent;
+}
 
+.login-screen {
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    background-color: #364f6b;
 }
-button{
-	border: none;
-	background-color: transparent;
+.login-screen form {
+    width: 300px;
+
+    padding: 40px;
+    background-color: #f5f5f5;
+}
+.card-link {
+    color: blue;
+}
+.text-error {
+    color: red;
+}
+.search-bar {
+    display: flex;
+    padding: 40px;
+}
+.search-bar input {
+    width: 300px;
 }

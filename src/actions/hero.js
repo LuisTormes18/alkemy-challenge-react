@@ -14,9 +14,7 @@ const token = process.env.REACT_APP_TOKEN;
 
 export const startSearchSuperheroByName = (name) => {
     return async (dispatch) => {
-        const resp = await axios.get(
-            `${base_url}/${token}/search/${name}`
-        );
+        const resp = await axios.get(`${base_url}/${token}/search/${name}`);
         const superheroes = resp.data;
 
         if (superheroes.error) {
@@ -50,7 +48,6 @@ export const setSuperheroToTeam = (superhero) => {
             addSuperheroToTeamLocalStorage([...heroTeam, superhero]);
             dispatch(addToTeam(superhero));
             Swal.fire("Added!", "Your file has been Added.", "success");
-
         }
     };
 };
@@ -72,13 +69,27 @@ export const removeSuperheroFromTeam = (id) => {
     };
 };
 const removeFromTeam = (newTeam) => {
-    return { 
-        type: types.removeFromTeam, 
-        payload: newTeam 
+    return {
+        type: types.removeFromTeam,
+        payload: newTeam,
     };
 };
 export const cleanSuperheroList = () => {
     return {
         type: types.cleansuperheroList,
+    };
+};
+export const cleanTeam = () => {
+    return {
+        type: types.cleanTeam,
+    };
+};
+
+export const loadMySuperheroesTeam = () => {
+    const team = JSON.parse(localStorage.getItem("heroTeam")) || [];
+
+    return {
+        type: types.loadTeam,
+        payload: team,
     };
 };

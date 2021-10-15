@@ -29,7 +29,7 @@ const authReducer = (state = initialState, action) => {
         case types.btnDisabled:
             return {
                 ...state,
-                btnDisabled: true,
+                btnDisabled: !state.btnDisabled,
             };
         default:
             return state;
